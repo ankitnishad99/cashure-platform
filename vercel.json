@@ -1,0 +1,40 @@
+{
+  "version": 2,
+  "name": "cashure-frontend",
+  "builds": [
+    {
+      "src": "client/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "dist"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/assets/(.*)",
+      "headers": {
+        "cache-control": "public, max-age=31536000, immutable"
+      }
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ],
+  "env": {
+    "VITE_API_URL": "@api_url",
+    "VITE_APP_NAME": "Cashure",
+    "VITE_APP_URL": "@app_url"
+  },
+  "build": {
+    "env": {
+      "VITE_API_URL": "@api_url",
+      "VITE_APP_NAME": "Cashure", 
+      "VITE_APP_URL": "@app_url"
+    }
+  },
+  "installCommand": "cd client && npm install",
+  "buildCommand": "cd client && npm run build",
+  "outputDirectory": "client/dist"
+}
